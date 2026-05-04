@@ -584,11 +584,40 @@
     margin-top: 16px;
   }
 
+  .screenshot-zone {
+    position: relative;
+    border: 2px dashed rgba(232, 127, 56, 0.55);
+    padding: 22px 22px 8px;
+    margin: 0 -8px;
+    background: rgba(232, 127, 56, 0.025);
+  }
+
+  .screenshot-badge {
+    position: absolute;
+    top: -12px;
+    left: 18px;
+    background: var(--nt-orange);
+    color: var(--nt-blue);
+    padding: 4px 10px 4px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1;
+  }
+
+  .screenshot-zone .results-header { margin-bottom: 28px; }
+  .screenshot-zone .score-grid { margin-bottom: 28px; }
+  .screenshot-zone .results-message { margin-bottom: 12px; }
+
   .screenshot-tip {
     background: rgba(232, 127, 56, 0.08);
     border: 1px solid rgba(232, 127, 56, 0.3);
     padding: 18px 24px;
-    margin-top: 32px;
+    margin-top: 24px;
     display: flex;
     gap: 16px;
     align-items: flex-start;
@@ -645,23 +674,173 @@
   /* ==== RESPONSIVE ==== */
   @media (max-width: 720px) {
     .swipe-hint { display: block; }
-    .app { padding: 20px 20px 40px; }
-    header.brand-bar { margin-bottom: 32px; }
-    .intro h1 { font-size: 44px; }
-    .intro .lede { font-size: 18px; }
-    .intro-grid { grid-template-columns: 1fr; }
-    .start-row { flex-direction: column; align-items: flex-start; }
-    button.primary { width: 100%; justify-content: center; }
-    .results-card { padding: 32px 24px; }
-    .results-name { font-size: 32px; }
-    .score-grid { grid-template-columns: 1fr; }
-    .score-value { font-size: 40px; }
-    .answer-row { grid-template-columns: 30px 1fr; }
-    .answer-row .answer-tag { grid-column: 2; justify-self: flex-start; }
-    .nav-buttons { flex-direction: column; }
-    button.ghost { width: 100%; justify-content: center; }
-    .question-text { font-size: 24px; }
-    .q-number { font-size: 48px; }
+
+    /* App fits viewport without page scroll on intro */
+    .app {
+      padding: 14px 18px 14px;
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    /* Compact header */
+    header.brand-bar {
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .logo-img { height: 26px; }
+    .meta { font-size: 9px; letter-spacing: 0.14em; }
+
+    /* INTRO — fit on one screen */
+    .intro {
+      padding: 0;
+      justify-content: flex-start;
+    }
+    .eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      margin-bottom: 14px;
+    }
+    .intro h1 {
+      font-size: 38px;
+      line-height: 0.95;
+      margin-bottom: 14px;
+    }
+    .intro .lede {
+      font-size: 14px;
+      line-height: 1.35;
+      margin-bottom: 20px;
+    }
+    .intro-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-bottom: 22px;
+    }
+    .intro-grid > div { padding: 12px 8px; }
+    .intro-grid .label {
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      margin-bottom: 6px;
+    }
+    .intro-grid .value {
+      font-size: 12px;
+      line-height: 1.15;
+    }
+    .name-input-wrap label {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      margin-bottom: 8px;
+    }
+    .name-input {
+      font-size: 20px;
+      padding: 8px 0;
+    }
+    .start-row {
+      flex-direction: column;
+      align-items: stretch;
+      margin-top: 18px;
+      gap: 14px;
+    }
+    .helper-text {
+      font-size: 11px;
+      max-width: none;
+      line-height: 1.4;
+    }
+    button.primary {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 28px;
+      font-size: 13px;
+    }
+
+    /* Hide footer on mobile to save vertical space */
+    footer { display: none; }
+
+    /* QUIZ — also tighter */
+    .quiz { padding: 0; }
+    .progress-bar { margin-bottom: 22px; }
+    .question-meta { margin-bottom: 14px; }
+    .q-number { font-size: 42px; }
+    .q-counter { font-size: 9px; }
+    .question-text {
+      font-size: 22px;
+      line-height: 1.22;
+      margin-bottom: 24px;
+    }
+    .options { margin-bottom: 22px; }
+    .option {
+      padding: 16px 18px;
+      font-size: 14px;
+      gap: 16px;
+    }
+    .option:hover, .option.selected { padding-left: 22px; }
+    .option .marker { font-size: 16px; min-width: 22px; }
+    .nav-buttons {
+      flex-direction: row;
+      gap: 10px;
+      padding-top: 18px;
+    }
+    button.ghost {
+      width: auto;
+      flex: 1;
+      justify-content: center;
+      padding: 14px 16px;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+    }
+
+    /* RESULTS — compact */
+    .results { padding: 0; }
+    .results-card { padding: 24px 14px; }
+    .results-name { font-size: 28px; }
+    .score-grid { grid-template-columns: 1fr 1fr; }
+    .score-grid > div:nth-child(3) { grid-column: 1 / -1; }
+    .score-value { font-size: 36px; }
+    .results-message { font-size: 15px; margin-bottom: 8px; }
+    .screenshot-zone {
+      padding: 20px 14px 4px;
+      margin: 4px -4px 0;
+    }
+    .screenshot-badge {
+      font-size: 9px;
+      padding: 3px 8px 3px 6px;
+      top: -11px;
+      left: 12px;
+    }
+    .screenshot-zone .results-header { margin-bottom: 20px; }
+    .screenshot-zone .score-grid { margin-bottom: 20px; }
+    .answer-row {
+      grid-template-columns: 28px 1fr auto;
+      padding: 12px 0;
+      gap: 12px;
+      font-size: 12px;
+    }
+    .answer-row .num { font-size: 13px; }
+    .answer-row .answer-tag {
+      font-size: 10px;
+      padding: 4px 8px;
+    }
+    .results-actions { flex-direction: column; }
+    .results-actions button.ghost { width: 100%; }
+  }
+
+  /* Extra small phones (iPhone SE etc.) */
+  @media (max-width: 380px) {
+    .intro h1 { font-size: 32px; }
+    .intro .lede { font-size: 13px; }
+    .intro-grid > div { padding: 10px 6px; }
+    .intro-grid .value { font-size: 11px; }
+    .name-input { font-size: 18px; }
+  }
+
+  /* Short screens (landscape phones) */
+  @media (max-height: 720px) and (max-width: 720px) {
+    .intro h1 { font-size: 32px; margin-bottom: 10px; }
+    .intro .lede {
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+    .intro-grid { margin-bottom: 14px; }
+    .intro-grid > div { padding: 8px 6px; }
+    .start-row { margin-top: 12px; }
   }
 </style>
 </head>
@@ -767,32 +946,42 @@
     </p>
 
     <div class="results-card">
-      <div class="results-header">
-        <div>
-          <div class="results-eyebrow">Crew Member</div>
-          <div class="results-name" id="resultName">—</div>
+
+      <div class="screenshot-zone">
+        <div class="screenshot-badge">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
+            <rect x="2" y="4" width="16" height="12" rx="1" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/>
+            <rect x="6" y="2" width="8" height="3" rx="0.5" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+          Screenshot this
         </div>
-        <div class="results-date" id="resultDate">—</div>
+
+        <div class="results-header">
+          <div>
+            <div class="results-eyebrow">Crew Member</div>
+            <div class="results-name" id="resultName">—</div>
+          </div>
+          <div class="results-date" id="resultDate">—</div>
+        </div>
+
+        <div class="score-grid">
+          <div>
+            <div class="score-label">Score</div>
+            <div class="score-value orange" id="correctCount">0<span class="total"> / 8</span></div>
+          </div>
+          <div>
+            <div class="score-label">Answered</div>
+            <div class="score-value purple" id="answeredCount">0<span class="total"> / 8</span></div>
+          </div>
+          <div>
+            <div class="score-label">Rank</div>
+            <div class="score-value" id="statusText" style="font-size: 26px;">—</div>
+          </div>
+        </div>
+
+        <p class="results-message" id="resultsMessage"></p>
       </div>
-
-      <div class="score-grid">
-        <div>
-          <div class="score-label">Score</div>
-          <div class="score-value orange" id="correctCount">0<span class="total"> / 8</span></div>
-        </div>
-        <div>
-          <div class="score-label">Answered</div>
-          <div class="score-value purple" id="answeredCount">0<span class="total"> / 8</span></div>
-        </div>
-        <div>
-          <div class="score-label">Rank</div>
-          <div class="score-value" id="statusText" style="font-size: 26px;">—</div>
-        </div>
-      </div>
-
-      <p class="results-message" id="resultsMessage"></p>
-
-      <div class="answers-list" id="answersList"></div>
 
       <div class="screenshot-tip">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink: 0; margin-top: 2px;">
@@ -802,17 +991,13 @@
         </svg>
         <div>
           <strong>Submit your answers</strong>
-          Take a screenshot of this entire page (or just this card) and send it to <strong style="color: var(--nt-white); letter-spacing: 0; text-transform: none; font-size: inherit; font-weight: 600;">Casper Svendsen on Teams</strong> to be entered into the tally.
+          Screenshot the highlighted area above and send it to <strong style="color: var(--nt-white); letter-spacing: 0; text-transform: none; font-size: inherit; font-weight: 600;">Casper Svendsen on Teams</strong> to be entered into the tally.
         </div>
       </div>
 
+      <div class="answers-list" id="answersList"></div>
+
       <div class="results-actions">
-        <button class="ghost" id="reviewBtn">
-          <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
-            <path d="M13 5H1m0 0l4-4M1 5l4 4" stroke="currentColor" stroke-width="1.5"/>
-          </svg>
-          Review answers
-        </button>
         <button class="ghost" id="restartBtn">
           Start over
         </button>
@@ -956,7 +1141,6 @@
     statusText: document.getElementById('statusText'),
     resultsMessage: document.getElementById('resultsMessage'),
     answersList: document.getElementById('answersList'),
-    reviewBtn: document.getElementById('reviewBtn'),
     restartBtn: document.getElementById('restartBtn')
   };
 
@@ -1232,14 +1416,6 @@
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-
-  el.reviewBtn.addEventListener('click', () => {
-    el.results.classList.remove('active');
-    el.quiz.classList.add('active');
-    state.current = 0;
-    renderQuestion();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
 
   el.restartBtn.addEventListener('click', () => {
     state.answers = new Array(questions.length).fill(null);
